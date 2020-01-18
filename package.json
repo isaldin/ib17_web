@@ -6,16 +6,19 @@
   "scripts": {
     "dev": "ts-node -T fuse.ts",
     "dist": "(rm -rf dist || true) && yarn tsc -p ./src/tsconfig.json --noEmit && yarn lint && ts-node -T fuse dist",
-    "docker:prod": "docker build -f docker/Dockerfile . -t spa/nginx",
+    "docker:prod": "docker build -f docker/Dockerfile . -t hhbttl/web",
     "test": "jest",
     "lint": "yarn eslint --ext .ts,.tsx src/"
   },
   "dependencies": {
     "ramda": "0.26.1",
     "react": "16.12.0",
-    "react-dom": "16.12.0"
+    "react-dom": "16.12.0",
+    "semantic-ui-css": "2.4.1",
+    "semantic-ui-react": "0.88.2"
   },
   "devDependencies": {
+    "@types/ramda": "0.26.39",
     "@types/jest": "24.0.25",
     "@types/react": "16.9.17",
     "@types/react-dom": "16.9.4",

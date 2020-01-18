@@ -1,0 +1,12 @@
+@import '../../assets/styles/variables.sass';
+
+.pageContainer {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+.pageContent {
+  flex: 1;
+  margin-top: $page_container_navbar_height + 40px;
+}
