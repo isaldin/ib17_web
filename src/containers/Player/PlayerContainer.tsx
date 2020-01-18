@@ -79,8 +79,15 @@ class PlayerContainer extends React.Component<{}, StateType> {
       propEq('trackId', this.state.currentTrack?.trackId),
       tracks,
     );
+
     if (currentTrackIndex > -1 && currentTrackIndex + 1 < tracks.length) {
       this.setState({ currentTrack: tracks[currentTrackIndex + 1] });
+    } else if (
+      // if current track is last in list, clear player
+      currentTrackIndex + 1 ===
+      tracks.length
+    ) {
+      this.setState({ currentTrack: null });
     }
   };
 

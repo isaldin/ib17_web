@@ -96,7 +96,16 @@ class Player extends React.Component<PropsType, StateType> {
     };
 
     this.player.onended = (_ev: Event): void => {
-      this.props.onPlayingTrackEnd();
+      this.setStateSafely(
+        {
+          currentTime: undefined,
+          duration: undefined,
+          status: null,
+        },
+        () => {
+          this.props.onPlayingTrackEnd();
+        },
+      );
     };
   };
 
@@ -174,7 +183,7 @@ class Player extends React.Component<PropsType, StateType> {
             <Header as="h5" color="grey" className={styles.timings}>
               {`${_secondsInHumanReadFormat(
                 this.state.currentTime || 0,
-              )}/${_secondsInHumanReadFormat(this.player?.duration || 0)}`}
+              )}/${_secondsInHumanReadFormat(this.state.duration || 0)}`}
             </Header>
           </div>
           <audio ref={this.setPlayerRef} src={track?.url} preload="auto" autoPlay={!!track} />
