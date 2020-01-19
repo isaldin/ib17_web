@@ -1,7 +1,7 @@
 import React from 'react';
 import { Table, Button, Popup } from 'semantic-ui-react';
 
-import { Artist } from '@app/apollo/graphql';
+import { TopRatedArtists_topRatedArtists as Artist } from './__generated__/TopRatedArtists';
 import styles from './Table.scss';
 
 import { map } from 'ramda';
