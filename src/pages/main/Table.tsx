@@ -1,12 +1,16 @@
 import React from 'react';
 import { Table, Button, Popup } from 'semantic-ui-react';
 
+import { Artist } from '@app/apollo/graphql';
 import styles from './Table.scss';
 
-import top10Artists from './topRatedArtists';
 import { map } from 'ramda';
 
-const TopArtistsTable = (): React.FunctionComponentElement<{}> => {
+interface PropsType {
+  artists: Artist[];
+}
+
+const TopArtistsTable = (props: PropsType): React.FunctionComponentElement<PropsType> => {
   return (
     <Table singleLine basic>
       <Table.Header>
@@ -26,7 +30,7 @@ const TopArtistsTable = (): React.FunctionComponentElement<{}> => {
       </Table.Header>
 
       <Table.Body>
-        {top10Artists.map((artist, idx) => (
+        {props.artists.map((artist, idx) => (
           <Table.Row key={artist.id} className={styles.row}>
             <Table.Cell rowSpan="1" textAlign="left">
               {++idx}

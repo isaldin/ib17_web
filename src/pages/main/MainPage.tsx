@@ -3,7 +3,7 @@ import { Container, Header } from 'semantic-ui-react';
 
 import PageContainer from '@app/containers/Page';
 
-import TopArtistsTable from './Table';
+import TopArtistsTableContainer from './TableContainer';
 
 const MainPage = (): React.FunctionComponentElement<{}> => (
   <PageContainer>
@@ -11,7 +11,7 @@ const MainPage = (): React.FunctionComponentElement<{}> => (
       <Header as="h3" textAlign="center">
         Top 100
       </Header>
-      <TopArtistsTable />
+      <TopArtistsTableContainer />
     </Container>
   </PageContainer>
 );
