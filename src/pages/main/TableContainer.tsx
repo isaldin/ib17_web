@@ -1,7 +1,7 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
 
-import { TopRatedArtists } from './__generated__/TopRatedArtists';
+import { TopRatedArtists } from '@app/apollo/__generated__/TopRatedArtists';
 import topRatedArtistsQuery from './topRatedArtistsQuery.graphql';
 
 import Table from './Table';

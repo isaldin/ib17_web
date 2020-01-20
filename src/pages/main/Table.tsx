@@ -1,7 +1,10 @@
 import React from 'react';
 import { Table, Button, Popup } from 'semantic-ui-react';
+import { useQuery } from '@apollo/client';
 
-import { TopRatedArtists_topRatedArtists as Artist } from './__generated__/TopRatedArtists';
+import GetPlaylistQuery from './getPlaylistQuery.graphql';
+import { TopRatedArtists_topRatedArtists as Artist } from '@app/apollo/__generated__/TopRatedArtists';
+import { GetPlaylistQuery as GetPlaylistQueryType } from '@app/apollo/__generated__/GetPlaylistQuery';
 import styles from './Table.scss';
 
 import { map } from 'ramda';
@@ -11,6 +14,10 @@ interface PropsType {
 }
 
 const TopArtistsTable = (props: PropsType): React.FunctionComponentElement<PropsType> => {
+  const { data, client } = useQuery<GetPlaylistQueryType>(GetPlaylistQuery);
+
+  console.log({ data });
+
   return (
     <Table singleLine basic>
       <Table.Header>
@@ -30,7 +37,7 @@ const TopArtistsTable = (props: PropsType): React.FunctionComponentElement<Props
       </Table.Header>
 
       <Table.Body>
-        {props.artists.map((artist, idx) => (
+        {props.artists.map((artist: Artist, idx) => (
           <Table.Row key={artist.id} className={styles.row}>
             <Table.Cell rowSpan="1" textAlign="left">
               {++idx}
@@ -44,7 +51,18 @@ const TopArtistsTable = (props: PropsType): React.FunctionComponentElement<Props
                     track => (
                       <Popup
                         key={track.id}
-                        trigger={<Button size="mini" icon="play" color="blue" />}
+                        trigger={
+                          <Button
+                            onClick={(): void => {
+                              client.writeData<GetPlaylistQueryType>({
+                                data: { currentPlaylist: [track] },
+                              });
+                            }}
+                            size="mini"
+                            icon="play"
+                            color="blue"
+                          />
+                        }
                         content={`${track.round} раунд`}
                         basic
                         size="mini"

@@ -2,7 +2,7 @@
 /* eslint-disable */
 // This file was automatically generated and should not be edited.
 
-import { TopRatedArtistsSort } from "./../../../apollo/globalTypes";
+import { TopRatedArtistsSort } from "./../globalTypes";
 
 // ====================================================
 // GraphQL query operation: TopRatedArtists
