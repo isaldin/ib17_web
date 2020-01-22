@@ -3,7 +3,10 @@ import { Table, Button, Popup } from 'semantic-ui-react';
 import { useQuery } from '@apollo/client';
 
 import GetPlaylistQuery from '@app/containers/Player/currentPlaylist.graphql';
-import { TopRatedArtists_topRatedArtists as Artist } from '@app/apollo/__generated__/TopRatedArtists';
+import {
+  TopRatedArtists_topRatedArtists as Artist,
+  TopRatedArtists_topRatedArtists_tracks as Track,
+} from '@app/apollo/__generated__/TopRatedArtists';
 import { CurrentPlaylistQuery as CurrentPlaylistQueryType } from '@app/apollo/__generated__/CurrentPlaylistQuery';
 import styles from './Table.scss';
 
@@ -14,7 +17,23 @@ interface PropsType {
 }
 
 const TopArtistsTable = (props: PropsType): React.FunctionComponentElement<PropsType> => {
-  const { client } = useQuery<CurrentPlaylistQueryType>(GetPlaylistQuery);
+  const { client, data } = useQuery<CurrentPlaylistQueryType>(GetPlaylistQuery);
+
+  const playlistItems = data?.currentPlaylist || [];
+
+  const addToPlaylistAndPlay = (track: Track): void => {
+    client.writeData<CurrentPlaylistQueryType>({
+      data: { currentPlaylist: [track] },
+    });
+    localStorage.setItem('playlist', JSON.stringify([track]));
+  };
+
+  const addToPlaylistQueue = (track: Track): void => {
+    client.writeData<CurrentPlaylistQueryType>({
+      data: { currentPlaylist: [...playlistItems, track] },
+    });
+    localStorage.setItem('playlist', JSON.stringify([...playlistItems, track]));
+  };
 
   return (
     <Table singleLine basic>
@@ -51,19 +70,23 @@ const TopArtistsTable = (props: PropsType): React.FunctionComponentElement<Props
                         key={track.id}
                         trigger={
                           <Button
-                            onClick={(): void => {
-                              client.writeData<CurrentPlaylistQueryType>({
-                                data: { currentPlaylist: [track] },
-                              });
-                            }}
+                            onClick={(): void => addToPlaylistAndPlay(track)}
                             size="mini"
                             icon="play"
                             color="blue"
                           />
                         }
-                        content={`${track.round} раунд`}
-                        basic
+                        content={
+                          <Button
+                            size="mini"
+                            color="blue"
+                            onClick={(): void => addToPlaylistQueue(track)}>
+                            В очередь
+                          </Button>
+                        }
                         size="mini"
+                        hoverable
+                        mouseEnterDelay={500}
                       />
                     ),
                     artist.tracks,

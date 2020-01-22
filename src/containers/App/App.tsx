@@ -6,8 +6,19 @@ import localResolvers from '@app/apollo/localResolvers';
 import MainPage from '@app/pages/main';
 import { PlayerContainerPortal } from '@app/containers/Player';
 
+const cache = new InMemoryCache();
+try {
+  cache.writeData({
+    data: {
+      currentPlaylist: JSON.parse(localStorage.getItem('playlist') || '[]'),
+    },
+  });
+} catch (error) {
+  console.error(error);
+}
+
 const client = new ApolloClient({
-  cache: new InMemoryCache(),
+  cache,
   link: new HttpLink({
     uri: 'http://localhost:4000/graphql',
   }),

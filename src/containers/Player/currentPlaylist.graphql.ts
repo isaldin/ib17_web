@@ -7,6 +7,7 @@ const currentPlaylistQuery = gql`
       path
       trackName
       artist {
+        id
         name
       }
     }

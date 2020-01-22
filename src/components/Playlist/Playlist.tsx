@@ -26,7 +26,7 @@ const Playlist = (props: PropsType): React.FunctionComponentElement<PropsType> =
   }
 
   return (
-    <Segment>
+    <Segment className={styles.segment}>
       <List divided relaxed>
         {map(
           track => (
