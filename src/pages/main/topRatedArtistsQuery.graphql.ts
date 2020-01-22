@@ -12,6 +12,11 @@ export default gql`
         id
         round
         path
+        trackName
+        artist {
+          id
+          name
+        }
       }
     }
   }

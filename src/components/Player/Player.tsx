@@ -1,14 +1,9 @@
 import React, { ReactNode } from 'react';
 import { Button, Header } from 'semantic-ui-react';
 
-import styles from './Player.scss';
+import { PlaylistItemType } from '@app/components/Playlist';
 
-export interface PlayerTrackType {
-  trackId: string;
-  url: string;
-  artist: string;
-  trackName: string;
-}
+import styles from './Player.scss';
 
 export type PlayerStatusType = 'playing' | 'paused' | null;
 
@@ -19,7 +14,7 @@ interface StateType {
 }
 
 interface PropsType {
-  track: PlayerTrackType | null;
+  track: PlaylistItemType | null;
   togglePlaylistVisibility: () => void;
   onPlayingStatusChange: (playingStatus: PlayerStatusType) => void;
   onPlayingTrackEnd: () => void;
@@ -186,7 +181,7 @@ class Player extends React.Component<PropsType, StateType> {
               )}/${_secondsInHumanReadFormat(this.state.duration || 0)}`}
             </Header>
           </div>
-          <audio ref={this.setPlayerRef} src={track?.url} preload="auto" autoPlay={!!track} />
+          <audio ref={this.setPlayerRef} src={track?.url || ''} preload="auto" autoPlay={!!track} />
         </div>
       </div>
     );

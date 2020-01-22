@@ -8,11 +8,19 @@ import { TopRatedArtistsSort } from "./../globalTypes";
 // GraphQL query operation: TopRatedArtists
 // ====================================================
 
+export interface TopRatedArtists_topRatedArtists_tracks_artist {
+  __typename: "Artist";
+  id: string;
+  name: string;
+}
+
 export interface TopRatedArtists_topRatedArtists_tracks {
   __typename: "Track";
   id: string;
   round: number;
   path: string | null;
+  trackName: string;
+  artist: TopRatedArtists_topRatedArtists_tracks_artist;
 }
 
 export interface TopRatedArtists_topRatedArtists {

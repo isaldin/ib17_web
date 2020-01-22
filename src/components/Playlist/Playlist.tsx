@@ -8,7 +8,7 @@ export interface PlaylistItemType {
   trackId: string;
   artist: string;
   trackName: string;
-  url: string;
+  url: string | null;
 }
 
 interface PropsType {

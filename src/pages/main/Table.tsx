@@ -2,9 +2,9 @@ import React from 'react';
 import { Table, Button, Popup } from 'semantic-ui-react';
 import { useQuery } from '@apollo/client';
 
-import GetPlaylistQuery from './getPlaylistQuery.graphql';
+import GetPlaylistQuery from '@app/containers/Player/currentPlaylist.graphql';
 import { TopRatedArtists_topRatedArtists as Artist } from '@app/apollo/__generated__/TopRatedArtists';
-import { GetPlaylistQuery as GetPlaylistQueryType } from '@app/apollo/__generated__/GetPlaylistQuery';
+import { CurrentPlaylistQuery as CurrentPlaylistQueryType } from '@app/apollo/__generated__/CurrentPlaylistQuery';
 import styles from './Table.scss';
 
 import { map } from 'ramda';
@@ -14,9 +14,7 @@ interface PropsType {
 }
 
 const TopArtistsTable = (props: PropsType): React.FunctionComponentElement<PropsType> => {
-  const { data, client } = useQuery<GetPlaylistQueryType>(GetPlaylistQuery);
-
-  console.log({ data });
+  const { client } = useQuery<CurrentPlaylistQueryType>(GetPlaylistQuery);
 
   return (
     <Table singleLine basic>
@@ -54,7 +52,7 @@ const TopArtistsTable = (props: PropsType): React.FunctionComponentElement<Props
                         trigger={
                           <Button
                             onClick={(): void => {
-                              client.writeData<GetPlaylistQueryType>({
+                              client.writeData<CurrentPlaylistQueryType>({
                                 data: { currentPlaylist: [track] },
                               });
                             }}
