@@ -24,6 +24,7 @@ module.exports = {
   rules: {
     'consistent-return': 'off',
     '@typescript-eslint/no-unused-vars': 'off',
+    '@typescript-eslint/explicit-function-return-type': 'off',
     'prettier/prettier': 'off',
   },
 };
