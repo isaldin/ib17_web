@@ -10,7 +10,7 @@ import {
 import { CurrentPlaylistQuery as CurrentPlaylistQueryType } from '@app/apollo/__generated__/CurrentPlaylistQuery';
 import styles from './Table.scss';
 
-import { map } from 'ramda';
+import { map, includes, find, propEq } from 'ramda';
 
 interface PropsType {
   artists: Artist[];
@@ -19,18 +19,36 @@ interface PropsType {
 const TopArtistsTable = (props: PropsType): React.FunctionComponentElement<PropsType> => {
   const { client, data } = useQuery<CurrentPlaylistQueryType>(GetPlaylistQuery);
 
-  const playlistItems = data?.currentPlaylist || [];
+  const playlistItems = data?.currentPlaylist?.tracks || [];
 
   const addToPlaylistAndPlay = (track: Track): void => {
+    // TODO: use mutation here
     client.writeData<CurrentPlaylistQueryType>({
-      data: { currentPlaylist: [track] },
+      data: {
+        currentPlaylist: {
+          __typename: 'Playlist',
+          id: 'UGxheWxpc3Q6MQ==', // 'Playlist:1'
+          tracks: [track],
+        },
+      },
     });
     localStorage.setItem('playlist', JSON.stringify([track]));
   };
 
   const addToPlaylistQueue = (track: Track): void => {
+    if (find(propEq('id', track.id), playlistItems)) {
+      return;
+    }
+
+    // TODO: use mutation here
     client.writeData<CurrentPlaylistQueryType>({
-      data: { currentPlaylist: [...playlistItems, track] },
+      data: {
+        currentPlaylist: {
+          __typename: 'Playlist',
+          id: 'UGxheWxpc3Q6MQ==', // 'Playlist:1'
+          tracks: [...playlistItems, track],
+        },
+      },
     });
     localStorage.setItem('playlist', JSON.stringify([...playlistItems, track]));
   };

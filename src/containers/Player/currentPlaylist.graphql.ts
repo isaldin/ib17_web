@@ -4,11 +4,14 @@ const currentPlaylistQuery = gql`
   query CurrentPlaylistQuery {
     currentPlaylist @client {
       id
-      path
-      trackName
-      artist {
+      tracks {
         id
-        name
+        path
+        trackName
+        artist {
+          id
+          name
+        }
       }
     }
   }

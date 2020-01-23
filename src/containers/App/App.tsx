@@ -10,7 +10,11 @@ const cache = new InMemoryCache();
 try {
   cache.writeData({
     data: {
-      currentPlaylist: JSON.parse(localStorage.getItem('playlist') || '[]'),
+      currentPlaylist: {
+        __typename: 'Playlist',
+        id: 'UGxheWxpc3Q6MQ==', // 'Playlist:1'
+        tracks: JSON.parse(localStorage.getItem('playlist') || '[]'),
+      },
     },
   });
 } catch (error) {
@@ -23,9 +27,7 @@ const client = new ApolloClient({
     uri: 'http://localhost:4000/graphql',
   }),
   resolvers: {
-    Query: {
-      ...localResolvers,
-    },
+    ...localResolvers,
   },
 });
 

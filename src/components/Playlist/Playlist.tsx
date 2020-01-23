@@ -1,7 +1,8 @@
 import React from 'react';
-import { Segment, List, Button } from 'semantic-ui-react';
+import { Segment, List } from 'semantic-ui-react';
 import { map } from 'ramda';
 
+import PlaylistCell from './Cell';
 import styles from './Playlist.scss';
 
 export interface PlaylistItemType {
@@ -12,6 +13,7 @@ export interface PlaylistItemType {
 }
 
 interface PropsType {
+  playlistId: string;
   tracks: PlaylistItemType[];
   playingTrackId: string | null;
   playingTrackStatus: 'playing' | 'paused' | null;
@@ -20,34 +22,20 @@ interface PropsType {
 }
 
 const Playlist = (props: PropsType): React.FunctionComponentElement<PropsType> => {
-  let playingTrackId: string | null;
-  if (props.playingTrackId && props.playingTrackStatus === 'playing') {
-    playingTrackId = props.playingTrackId;
-  }
-
   return (
     <Segment className={styles.segment}>
       <List divided relaxed>
         {map(
           track => (
-            <List.Item key={track.trackId}>
-              <List.Content className={styles.cell}>
-                {track.trackId === playingTrackId ? (
-                  <Button color="blue" icon="pause" size="mini" onClick={props.onPauseClick} />
-                ) : (
-                  <Button
-                    color="blue"
-                    icon="play"
-                    size="mini"
-                    onClick={(): void => props.onPlayClick(track)}
-                  />
-                )}
-                <div className={styles.trackInfoWrapper}>
-                  <List.Header className={styles.artist}>{track.artist}</List.Header>
-                  <span className={styles.track}>{track.trackName}</span>
-                </div>
-              </List.Content>
-            </List.Item>
+            <PlaylistCell
+              key={track.trackId}
+              playlistId={props.playlistId}
+              track={track}
+              playingTrackId={props.playingTrackId}
+              playingTrackStatus={props.playingTrackStatus}
+              onPlayClick={props.onPlayClick}
+              onPauseClick={props.onPauseClick}
+            />
           ),
           props.tracks,
         )}

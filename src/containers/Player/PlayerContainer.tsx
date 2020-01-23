@@ -1,10 +1,11 @@
 import React, { createRef } from 'react';
+import { findIndex, propEq } from 'ramda';
 
 import { Player, PlayerStatusType } from '@app/components/Player';
 import { Playlist, PlaylistItemType } from '@app/components/Playlist';
-import { findIndex, propEq } from 'ramda';
 
 export interface PropsType {
+  playlistId: string;
   tracks: PlaylistItemType[];
 }
 
@@ -101,6 +102,7 @@ class PlayerContainer extends React.Component<PropsType, StateType> {
       <>
         {this.state.isPlaylistVisible && (
           <Playlist
+            playlistId={this.props.playlistId}
             tracks={this.props.tracks}
             onPlayClick={this.handlePlayListItemPlayClick}
             onPauseClick={this.handlePlaylistItemPauseClick}

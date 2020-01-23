@@ -1,3 +1,14 @@
 extend type Query {
-  currentPlaylist: [Track!]!
+  currentPlaylist: Playlist!
+}
+
+extend type Mutation {
+  moveTrackUpInPlaylist(trackId: ID!, playlistId: ID!): Boolean
+  moveTrackDownInPlaylist(trackId: ID!, playlistId: ID!): Playlist!
+  removeTrackFromPlaylist(trackId: ID!, playlistId: ID!): Playlist!
+}
+
+type Playlist {
+  id: ID!
+  tracks: [Track!]!
 }
