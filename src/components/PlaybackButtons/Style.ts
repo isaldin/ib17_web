@@ -1,13 +1,17 @@
 import styled from 'styled-components';
 
-const Button = styled.button`
+interface PlaybackButtonProps {
+  background?: string;
+  color?: string;
+}
+const PlaybackButton = styled.button<PlaybackButtonProps>`
   width: 20px;
   height: 20px;
   border: 0;
-  background-color: transparent;
+  color: ${props => props.color || `goldenrod`};
+  background-color: ${props => props.background || `transparent`};
   font-size: 16px;
   cursor: pointer;
-  color: goldenrod;
   margin-left: 5px;
 
   :hover {
@@ -19,4 +23,4 @@ const Button = styled.button`
   }
 `;
 
-export { Button };
+export { PlaybackButton };

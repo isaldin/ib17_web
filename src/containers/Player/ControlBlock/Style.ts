@@ -37,14 +37,18 @@ const ProgressBar = styled.div`
 interface ProgressProps {
   progress: number;
 }
-const Progress = styled.div<ProgressProps>`
+const ProgressBase = styled.div<ProgressProps>`
   margin-bottom: 0 !important;
   appearance: none;
   height: 5px;
   border-radius: 2px;
-  width: ${props => props.progress}%;
   background-color: #2185d0;
 `;
+const Progress = styled(ProgressBase).attrs((props: ProgressProps) => ({
+  style: {
+    width: `${props.progress}%`,
+  },
+}))``; // shhhhhhit
 
 const Buttons = styled.div`
   align-items: center;

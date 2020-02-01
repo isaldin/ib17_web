@@ -3,40 +3,40 @@ import React from 'react';
 import { faBackward, faForward, faList, faPause, faPlay } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { Button } from './Style';
+import { PlaybackButton } from './Style';
 
 interface PropsType {
   onClick: () => void;
 }
 
 const PlayButton: React.FC<PropsType> = props => (
-  <Button onClick={props.onClick}>
+  <PlaybackButton onClick={props.onClick}>
     <FontAwesomeIcon icon={faPlay} />
-  </Button>
+  </PlaybackButton>
 );
 
 const PauseButton: React.FC<PropsType> = props => (
-  <Button onClick={props.onClick}>
+  <PlaybackButton onClick={props.onClick}>
     <FontAwesomeIcon icon={faPause} />
-  </Button>
+  </PlaybackButton>
 );
 
 const NextButton: React.FC<PropsType> = props => (
-  <Button onClick={props.onClick}>
+  <PlaybackButton onClick={props.onClick}>
     <FontAwesomeIcon icon={faForward} />
-  </Button>
+  </PlaybackButton>
 );
 
 const PrevButton: React.FC<PropsType> = props => (
-  <Button onClick={props.onClick}>
+  <PlaybackButton onClick={props.onClick}>
     <FontAwesomeIcon icon={faBackward} />
-  </Button>
+  </PlaybackButton>
 );
 
 const ListButton: React.FC<PropsType> = props => (
-  <Button onClick={props.onClick}>
+  <PlaybackButton onClick={props.onClick}>
     <FontAwesomeIcon icon={faList} />
-  </Button>
+  </PlaybackButton>
 );
 
 export { PlayButton, PauseButton, PrevButton, NextButton, ListButton };
