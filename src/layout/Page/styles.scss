@@ -1,0 +1,10 @@
+.pageContainer {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+.pageContent {
+  flex: 1;
+  margin-top: 100px;
+}

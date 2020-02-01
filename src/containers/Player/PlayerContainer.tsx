@@ -1,8 +1,8 @@
-import React, { createRef } from 'react';
 import { findIndex, propEq } from 'ramda';
+import React, { createRef } from 'react';
 
-import { Player, PlayerStatusType } from '@app/components/Player';
-import { Playlist, PlaylistItemType } from '@app/components/Playlist';
+import ControlBlock, { PlayerStatusType } from './ControlBlock';
+import Playlist, { PlaylistItemType } from './Playlist';
 
 export interface PropsType {
   playlistId: string;
@@ -16,7 +16,7 @@ interface StateType {
 }
 
 class PlayerContainer extends React.Component<PropsType, StateType> {
-  playerRef = createRef<Player>();
+  playerRef = createRef<ControlBlock>();
 
   state: StateType = {
     isPlaylistVisible: true,
@@ -110,7 +110,7 @@ class PlayerContainer extends React.Component<PropsType, StateType> {
             playingTrackStatus={this.state.playingStatus}
           />
         )}
-        <Player
+        <ControlBlock
           track={this.state.currentTrack}
           togglePlaylistVisibility={this.handleTogglePlaylistVisibility}
           onPlayingStatusChange={this.handlePlayingStatusChange}

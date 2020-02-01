@@ -1,19 +1,15 @@
 import React from 'react';
-import { Container, Header } from 'semantic-ui-react';
 
-import PageContainer from '@app/containers/Page';
+import Page from '@app/layout/Page';
 
-import TopArtistsTableContainer from './TableContainer';
+import { Header } from './Style';
+import TopArtistsTable from './Table';
 
-const MainPage = (): React.FunctionComponentElement<{}> => (
-  <PageContainer>
-    <Container>
-      <Header as="h3" textAlign="center">
-        Top 100
-      </Header>
-      <TopArtistsTableContainer />
-    </Container>
-  </PageContainer>
+const MainPage: React.FC = () => (
+  <Page>
+    <Header>Top 100</Header>
+    <TopArtistsTable />
+  </Page>
 );
 
 export default MainPage;

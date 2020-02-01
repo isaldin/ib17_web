@@ -26,5 +26,6 @@ module.exports = {
     '@typescript-eslint/no-unused-vars': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
     'prettier/prettier': 'off',
+    'react/prop-types': 'off',
   },
 };

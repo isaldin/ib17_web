@@ -1,18 +1,17 @@
-import React from 'react';
-import { useQuery, useMutation } from '@apollo/client';
 import { map } from 'ramda';
+import React from 'react';
 
+import { useMutation, useQuery } from '@apollo/client';
 import { CurrentPlaylistQuery } from '@app/apollo/__generated__/CurrentPlaylistQuery';
 import {
-  MoveTrackUpMutation,
-  MoveTrackUpMutationVariables,
+    MoveTrackUpMutation, MoveTrackUpMutationVariables
 } from '@app/apollo/__generated__/MoveTrackUpMutation';
-import moveTrackUpMutationGQL from './moveTrackUpMutation.graphql';
-import { PlaylistItemType } from '@app/components/Playlist';
 
-import PlayerContainer from './PlayerContainer';
 import currentPlaylistQuery from './currentPlaylist.graphql';
+import moveTrackUpMutationGQL from './moveTrackUpMutation.graphql';
+import PlayerContainer from './PlayerContainer';
 import { PlayerProvider } from './PlayerProvider';
+import { PlaylistItemType } from './Playlist';
 
 const HOC: React.FC = () => {
   const { data, loading, error } = useQuery<CurrentPlaylistQuery>(currentPlaylistQuery);
